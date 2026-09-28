@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comic Preview - ComicCraft</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fef08a;
+            background-image: 
+                radial-gradient(#eab308 2px, transparent 2px),
+                radial-gradient(#f59e0b 2px, #fef08a 2px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            background-attachment: fixed;
+            color: #111827;
+            padding: 40px 20px 80px 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: #111827;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .panel-card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 28px;
+            margin-bottom: 30px;
+            box-shadow: 8px 8px 0px #111827;
+            border: 3.5px solid #111827;
+        }
+
+        .panel-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+
+        .image-wrapper {
+            width: 100%;
+            text-align: center;
+            background: #f9fafb;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            max-height: 480px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .scene-description {
+            font-style: italic;
+            color: #4b5563;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .panel-narration {
+            white-space: pre-line;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #1f2937;
+        }
+
+        .image-prompt-box {
+            font-size: 13px;
+            color: #6b7280;
+            background: #f9fafb;
+            border-left: 3px solid #0b66c2;
+            padding: 8px 12px;
+            margin-bottom: 14px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .image-prompt-box strong {
+            color: #374151;
+        }
+
+        .action-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #0b66c2;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(11, 102, 194, 0.3);
+            transition: background-color 0.2s, transform 0.1s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .download-btn:hover {
+            background-color: #095196;
+            transform: translateY(-1px);
+        }
+
+        .download-btn:active {
+            transform: translateY(1px);
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 18px;
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+            color: #111827;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>📖 Your Comic Preview</h1>
+        </div>
+
+        {% for panel in layout %}
+        <div class="panel-card">
+            <h2 class="panel-title">Panel {{ panel.panel }}: {{ panel.title }}</h2>
+
+            <div class="image-wrapper">
+                <img src="{{ panel.image_path }}" alt="Panel {{ panel.panel }} Illustration">
+            </div>
+
+            {% if panel.scene_description %}
+            <p class="scene-description">{{ panel.scene_description }}</p>
+            {% endif %}
+
+            {% if panel.image_prompt %}
+            <div class="image-prompt-box">
+                <strong>Art Prompt Reference:</strong> {{ panel.image_prompt }}
+            </div>
+            {% endif %}
+
+            <div class="panel-narration">{{ panel.text }}</div>
+        </div>
+        {% endfor %}
+
+        <div class="action-container">
+            <a href="{{ pdf_path }}" download onclick="handleDownload(event, '{{ pdf_path }}')" class="download-btn">
+                📥 Download Your Comic as PDF
+            </a>
+            <div>
+                <a href="/" class="back-link">← Create Another Comic</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleDownload(e, path) {
+            setTimeout(function() {
+                window.location.href = '/export-success?pdf_path=' + encodeURIComponent(path);
+            }, 600);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# Virtual environments
+.venv/
+comiccraft-env/
+env/
+venv/
+ENV/
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+*.pkl
+
+# Generated outputs & exports
+static/exports/*
+!static/exports/.gitkeep
+static/panels/*
+!static/panels/.gitkeep
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db

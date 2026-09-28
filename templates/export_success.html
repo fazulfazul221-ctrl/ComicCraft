@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comic Exported Successfully - ComicCraft</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #fef08a;
+            background-image: 
+                radial-gradient(#eab308 2px, transparent 2px),
+                radial-gradient(#f59e0b 2px, #fef08a 2px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .success-card {
+            background: #ffffff;
+            width: 100%;
+            max-width: 620px;
+            padding: 50px 40px;
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 8px 8px 0px #111827;
+            border: 3.5px solid #111827;
+        }
+
+        .success-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .success-message {
+            font-size: 16px;
+            color: #374151;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #0b66c2;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 13px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(11, 102, 194, 0.25);
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        .cta-btn:hover {
+            background-color: #095196;
+            transform: translateY(-1px);
+        }
+
+        .secondary-link {
+            display: block;
+            margin-top: 20px;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .secondary-link:hover {
+            text-decoration: underline;
+            color: #111827;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="success-card">
+        <h1 class="success-title">
+            <span>✅</span> Comic Exported Successfully!
+        </h1>
+        <p class="success-message">
+            Your AI-powered comic has been successfully created! Dive back in and bring another story to life.
+        </p>
+        <a href="/" class="cta-btn">
+            <span>🎨</span> Go Create Another Comic
+        </a>
+
+        {% if pdf_path %}
+        <div>
+            <a href="{{ pdf_path }}" download class="secondary-link">📥 Click here if your PDF download didn't start</a>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
